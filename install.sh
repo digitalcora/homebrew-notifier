@@ -5,6 +5,7 @@ NOTIFIER_URL=https://raw.githubusercontent.com/grantovich/homebrew-notifier/mast
 brew install terminal-notifier
 mkdir -p ~/.bin
 curl -fsS $NOTIFIER_URL > ~/.bin/brew-update-notifier.sh
+chmod +x ~/.bin/brew-update-notifier.sh
 
 if crontab -l | grep -q 'brew-update-notifier'; then
   echo 'Crontab entry already exists, skipping...'
