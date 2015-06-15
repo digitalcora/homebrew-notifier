@@ -15,8 +15,8 @@ outdated=$(comm -1 -3 <(echo "$pinned") <(echo "$outdated"))
 if [ -n "$outdated" ]; then
     if [ -e "$TERMINAL_NOTIFIER" ]; then
         lc=$(echo "$outdated" | wc -l)
-        outdated=$(echo "$outdated" | tail -"$lc")
-        message=$(echo "$outdated" | head -5)
+        outdated=$(echo "$outdated" | tail -n "$lc")
+        message=$(echo "$outdated" | head -n 5)
         if [ "$outdated" != "$message" ]; then
             message="Some of the outdated formulae are:
 $message"
