@@ -10,7 +10,7 @@ chmod +x ~/.bin/brew-update-notifier.sh
 if crontab -l | grep -q 'brew-update-notifier'; then
   echo 'Crontab entry already exists, skipping...'
 else
-  echo "0 11 * * * PATH=/usr/local/bin:\$PATH $(echo ~)/.bin/brew-update-notifier.sh" | crontab -
+  echo "0 11 * * * PATH=/usr/local/bin:\$PATH $HOME/.bin/brew-update-notifier.sh" | crontab -
 fi
 
 echo
