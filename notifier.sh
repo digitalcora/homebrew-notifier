@@ -1,7 +1,4 @@
 #!/bin/bash
-#
-# Homebrew Update Notifier
-# Original Author: Chris Streeter <http://www.chrisstreeter.com>
 
 BREW=$(which brew)
 TERMINAL_NOTIFIER=$(which terminal-notifier)
