@@ -22,6 +22,7 @@ $message"
 $message"
         fi
         $TERMINAL_NOTIFIER -sender com.apple.Terminal \
-            -title "Homebrew Updates Available" -message "$message"
+            -title "Homebrew Updates Available" -message "$message" \
+            -appIcon homebrew_icon.png
     fi
 fi
