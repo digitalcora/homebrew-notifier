@@ -10,8 +10,8 @@ pinned=$($BREW list --pinned)
 updatable=$(comm -1 -3 <(echo "$pinned") <(echo "$outdated"))
 
 if [ -n "$updatable" ] && [ -e "$TERMINAL_NOTIFIER" ]; then
-    message="The following formulae are outdated:
-$updatable"
     $TERMINAL_NOTIFIER -sender com.apple.Terminal \
-        -title "Homebrew Updates Available" -message "$message"
+        -title "Homebrew Updates Available" \
+        -subtitle "The following formulae are outdated:" \
+        -message "$updatable"
 fi
