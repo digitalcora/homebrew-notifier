@@ -13,5 +13,6 @@ if [ -n "$updatable" ] && [ -e "$TERMINAL_NOTIFIER" ]; then
     $TERMINAL_NOTIFIER -sender com.apple.Terminal \
         -title "Homebrew Updates Available" \
         -subtitle "The following formulae are outdated:" \
-        -message "$updatable"
+        -message "$updatable" \
+        -sound default
 fi
