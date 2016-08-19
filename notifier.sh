@@ -47,16 +47,15 @@ $BREW update > /dev/null 2>&1
 outdated=$($BREW outdated --quiet)
 pinned=$($BREW list --pinned)
 updatable=$(comm -1 -3 <(echo "$pinned") <(echo "$outdated") | xargs)
-updatable=$(echo -e " vim\nmongodb\ngo " | xargs)
 
 if [ -n "$updatable" ] && [ -e "$TERMINAL_NOTIFIER" ]; then
     echo "Packages found to update: $updatable"
 
-    if [ $UPGRADE = "auto" ] && [ -f $UPGRADE_SCRIPT ]; then
+    if [ "$UPGRADE" = "auto" ] && [ -f "$UPGRADE_SCRIPT" ]; then
         $UPGRADE_SCRIPT $CLEANUP "$updatable"
-    elif [ $UPGRADE = "prompt" ] && [ -f $UPGRADE_SCRIPT ]; then
+    elif [ "$UPGRADE" = "prompt" ] && [ -f "$UPGRADE_SCRIPT" ]; then
         $TERMINAL_NOTIFIER -sender com.apple.Terminal \
-            -appIcon $BEER_ICON \
+            -appIcon "$BEER_ICON" \
             -title "Homebrew Updates Available" \
             -subtitle "Click here to update the following formulae:" \
             -message "$updatable" \
@@ -64,7 +63,7 @@ if [ -n "$updatable" ] && [ -e "$TERMINAL_NOTIFIER" ]; then
             -execute "$UPGRADE_COMMAND $CLEANUP $updatable"
     else
         $TERMINAL_NOTIFIER -sender com.apple.Terminal \
-            -appIcon $BEER_ICON \
+            -appIcon "$BEER_ICON" \
             -title "Homebrew Updates Available" \
             -subtitle "The following formulae are outdated:" \
             -message "$updatable" \
