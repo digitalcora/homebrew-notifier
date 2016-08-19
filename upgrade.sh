@@ -38,6 +38,7 @@ if [ -n "$BREW_UPGRADE_STATUS" ]; then
             -subtitle "Successfully updated the following formulae:" \
             -message "$PACKAGES_TO_UPGRADE" \
             -sound default
+            -execute "say 🍺"
     else
         $TERMINAL_NOTIFIER -sender com.apple.Terminal \
             -appIcon $BEER_ICON \
