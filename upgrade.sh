@@ -15,7 +15,7 @@ if [ -n "$PACKAGES_TO_UPGRADE" ] && [ $PACKAGE_COUNT -gt 0 ]; then
         -subtitle "Update in progress" \
         -message "Updating $PACKAGE_COUNT formulae..."
 
-    $BREW upgrade "$PACKAGES_TO_UPGRADE" 2>&1 >> $BREW_UPDATE_LOG
+    $BREW upgrade $(echo $PACKAGES_TO_UPGRADE) 2>&1 >> $BREW_UPDATE_LOG
     BREW_UPGRADE_STATUS=$?
 fi
 

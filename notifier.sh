@@ -33,7 +33,7 @@ $BREW update > /dev/null 2>&1
 
 outdated=$($BREW outdated --quiet)
 pinned=$($BREW list --pinned)
-updatable=$(comm -1 -3 <(echo "$pinned") <(echo "$outdated"))
+updatable=$(comm -1 -3 <(echo "$pinned") <(echo "$outdated") | tr '\n' ' ')
 
 if [ -n "$updatable" ] && [ -e "$TERMINAL_NOTIFIER" ]; then
     if [ $UPGRADE = "auto" ] && [ -f $UPGRADE_SCRIPT ]; then
