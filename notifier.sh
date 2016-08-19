@@ -1,7 +1,32 @@
 #!/bin/bash
 
+UPGRADE="off"
+CLEANUP=false
+while [[ $# -gt 1 ]]
+do
+    key="$1"
+    case $key in
+        --upgrade)
+            UPGRADE="$2"
+            shift
+            ;;
+        --cleanup)
+            CLEANUP=true
+            shift
+            ;;
+        *)
+            # unknown option
+            ;;
+    esac
+    shift
+done
+
 BREW=$(which brew)
 TERMINAL_NOTIFIER=$(which terminal-notifier)
+NOTIFIER_PATH=$HOME/.homebrew-notifier
+BEER_ICON=$NOTIFIER_PATH/beer-icon.png
+UPGRADE_SCRIPT=$HOME$NOTIFIER_PATH/upgrade.sh
+UPGRADE_COMMAND="PATH=/usr/local/bin:\$PATH $UPGRADE_SCRIPT"
 
 $BREW update > /dev/null 2>&1
 
@@ -10,9 +35,22 @@ pinned=$($BREW list --pinned)
 updatable=$(comm -1 -3 <(echo "$pinned") <(echo "$outdated"))
 
 if [ -n "$updatable" ] && [ -e "$TERMINAL_NOTIFIER" ]; then
-    $TERMINAL_NOTIFIER -sender com.apple.Terminal \
-        -title "Homebrew Updates Available" \
-        -subtitle "The following formulae are outdated:" \
-        -message "$updatable" \
-        -sound default
+    if [ $UPGRADE = "auto" ] && [ -f $UPGRADE_SCRIPT ]; then
+        $UPGRADE_COMMAND $CLEANUP $updatable
+    elif [ $UPGRADE = "prompt" ] && [ -f $UPGRADE_SCRIPT ]; then
+        $TERMINAL_NOTIFIER -sender com.apple.Terminal \
+            -appIcon $BEER_ICON \
+            -title "Homebrew Updates Available" \
+            -subtitle "Click here to update the following formulae:" \
+            -message "$updatable" \
+            -sound default
+            -execute "$UPGRADE_COMMAND $CLEANUP $updatable"
+    else
+        $TERMINAL_NOTIFIER -sender com.apple.Terminal \
+            -appIcon $BEER_ICON \
+            -title "Homebrew Updates Available" \
+            -subtitle "The following formulae are outdated:" \
+            -message "$updatable" \
+            -sound default
+    fi
 fi
