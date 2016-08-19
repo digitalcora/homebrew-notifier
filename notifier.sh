@@ -2,19 +2,20 @@
 
 UPGRADE="off"
 CLEANUP=false
-while [[ $# -gt 1 ]]
+while [[ $# -ge 1 ]]
 do
     key="$1"
     case $key in
-        --upgrade)
+        "--upgrade")
             UPGRADE="$2"
             shift
             ;;
-        --cleanup)
+        "--cleanup")
             CLEANUP=true
             shift
             ;;
         *)
+            echo "unknown"
             # unknown option
             ;;
     esac
@@ -25,7 +26,7 @@ BREW=$(which brew)
 TERMINAL_NOTIFIER=$(which terminal-notifier)
 NOTIFIER_PATH=$HOME/.homebrew-notifier
 BEER_ICON=$NOTIFIER_PATH/beer-icon.png
-UPGRADE_SCRIPT=$HOME$NOTIFIER_PATH/upgrade.sh
+UPGRADE_SCRIPT=$NOTIFIER_PATH/upgrade.sh
 UPGRADE_COMMAND="PATH=/usr/local/bin:\$PATH $UPGRADE_SCRIPT"
 
 $BREW update > /dev/null 2>&1
@@ -43,7 +44,7 @@ if [ -n "$updatable" ] && [ -e "$TERMINAL_NOTIFIER" ]; then
             -title "Homebrew Updates Available" \
             -subtitle "Click here to update the following formulae:" \
             -message "$updatable" \
-            -sound default
+            -sound default \
             -execute "$UPGRADE_COMMAND $CLEANUP $updatable"
     else
         $TERMINAL_NOTIFIER -sender com.apple.Terminal \
