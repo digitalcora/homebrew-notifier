@@ -37,7 +37,7 @@ updatable=$(comm -1 -3 <(echo "$pinned") <(echo "$outdated"))
 
 if [ -n "$updatable" ] && [ -e "$TERMINAL_NOTIFIER" ]; then
     if [ $UPGRADE = "auto" ] && [ -f $UPGRADE_SCRIPT ]; then
-        $UPGRADE_COMMAND $CLEANUP $updatable
+        $UPGRADE_ $CLEANUP "$updatable"
     elif [ $UPGRADE = "prompt" ] && [ -f $UPGRADE_SCRIPT ]; then
         $TERMINAL_NOTIFIER -sender com.apple.Terminal \
             -appIcon $BEER_ICON \
