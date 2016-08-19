@@ -9,7 +9,7 @@ exec 1>>$LOG 2>&1
 echo "$(date) - Start upgrade script"
 
 CLEANUP=$1
-PACKAGES_TO_UPGRADE="${@:2}"
+PACKAGES_TO_UPGRADE="${*:2}"
 PACKAGE_COUNT="$(( $# - 1 ))"
 BREW=$(which brew)
 TERMINAL_NOTIFIER=$(which terminal-notifier)
@@ -58,7 +58,7 @@ if [ -n "$BREW_UPGRADE_STATUS" ]; then
         echo "Upgrades failed!"
 
         $TERMINAL_NOTIFIER -sender com.apple.Terminal \
-            -appIcon $BEER_ICON \
+            -appIcon "$BEER_ICON" \
             -title "Homebrew Updates Failed" \
             -subtitle "Failed to update some or all of the following formulae:" \
             -message "$PACKAGES_TO_UPGRADE" \
