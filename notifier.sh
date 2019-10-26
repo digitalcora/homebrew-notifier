@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BREW=$(which brew)
-TERMINAL_NOTIFIER=$(which terminal-notifier)
+BREW=$(command -v brew)
+TERMINAL_NOTIFIER=$(command -v terminal-notifier)
 
 $BREW update > /dev/null 2>&1
 
