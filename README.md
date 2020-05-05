@@ -7,7 +7,7 @@ added script to idempotently install it as a daily cron task.
 ## Installation
 
 ```
-curl -fsS https://raw.githubusercontent.com/grantovich/homebrew-notifier/master/install.sh | sh
+curl -fsS https://raw.githubusercontent.com/digitalcora/homebrew-notifier/master/install.sh | sh
 ```
 
 ## Contributing
@@ -27,9 +27,8 @@ curl -fsS https://raw.githubusercontent.com/grantovich/homebrew-notifier/master/
 * **Conduct:** Be kind and respectful to fellow contributors. Anyone who engages
   in abusive, harassing, or otherwise hurtful behavior will be swiftly and
   permanently removed from all project spaces. See the [Contributor Covenant]
-  for examples of acceptable and unacceptable behavior. Reports sent to
-  <alex@grantovich.net> will be handled confidentially.
+  for examples of acceptable and unacceptable behavior.
 
 [Git Protocol]: https://github.com/thoughtbot/guides/tree/master/protocol/git
-[LICENSE]: https://github.com/grantovich/homebrew-notifier/blob/master/LICENSE
-[Contributor Covenant]: http://contributor-covenant.org/
+[LICENSE]: https://github.com/digitalcora/homebrew-notifier/blob/master/LICENSE
+[Contributor Covenant]: https://www.contributor-covenant.org/
